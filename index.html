@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Film++ AI Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              // Map custom colors to CSS variables for dynamic theming
+              'cine-black': 'var(--cine-black)', 
+              'cine-dark': 'var(--cine-dark)',  
+              'cine-panel': 'var(--cine-panel)', 
+              'cine-border': 'var(--cine-border)', 
+              'cine-accent': '#D6001C', 
+              'cine-accent-hover': '#ff334b', 
+              'cine-brand-red': '#D6001C', 
+              'cine-text-muted': 'var(--cine-text-muted)',
+              
+              // Smart override of Zinc to ensure text readability in Light mode
+              // In Dark mode: Zinc 300 is light gray. In Light mode: It becomes dark gray.
+              zinc: {
+                200: 'var(--zinc-200)',
+                300: 'var(--zinc-300)', // Main text
+                400: 'var(--zinc-400)',
+                500: 'var(--zinc-500)', // Muted text
+                600: 'var(--zinc-600)',
+                700: 'var(--zinc-700)',
+                800: 'var(--zinc-800)', // Borders
+                900: 'var(--zinc-900)', // Dark backgrounds (Dark Mode) / Light Gray (Light Mode)
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+            },
+            borderRadius: {
+              'xl': '0.75rem',
+              '2xl': '1rem',
+              '3xl': '1.5rem',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        /* LIGHT MODE VARIABLES */
+        --cine-black: #fafafa;      /* Main Background: Soft Off-White to reduce glare */
+        --cine-dark: #f4f4f5;       /* Sidebar: Zinc-100 */
+        --cine-panel: #ffffff;      /* Panels: Pure White for pop */
+        --cine-border: #e4e4e7;     /* Borders: Zinc-200 */
+        --cine-text-muted: #71717a; /* Muted Text */
+
+        /* Inverted Zinc Scale for Text Contrast & Input visibility */
+        --zinc-200: #18181b; /* Darkest (Text) */
+        --zinc-300: #18181b; /* Text-zinc-300 becomes Near Black in Light Mode */
+        --zinc-400: #52525b;
+        --zinc-500: #71717a;
+        --zinc-600: #a1a1aa;
+        --zinc-700: #d4d4d8;
+        --zinc-800: #e4e4e7; /* Borders become light */
+        --zinc-900: #f4f4f5; /* INPUT BACKGROUNDS: Light Gray in Light Mode */
+      }
+
+      .dark {
+        /* DARK MODE VARIABLES (Original Look) */
+        --cine-black: #050505;
+        --cine-dark: #0a0a0c;
+        --cine-panel: #121214;
+        --cine-border: #27272a;
+        --cine-text-muted: #71717a;
+
+        /* Standard Zinc Scale */
+        --zinc-200: #e4e4e7;
+        --zinc-300: #d4d4d8;
+        --zinc-400: #a1a1aa;
+        --zinc-500: #71717a;
+        --zinc-600: #52525b;
+        --zinc-700: #3f3f46;
+        --zinc-800: #27272a;
+        --zinc-900: #18181b; /* Dark Gray/Black inputs */
+      }
+
+      body {
+        background-color: var(--cine-black);
+        color: var(--zinc-300); /* Default text color */
+        font-family: 'Inter', sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      /* Elements transition for smooth theme switch */
+      *, *::before, *::after {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+
+      /* Modern Slim Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--zinc-800); 
+        border-radius: 99px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--zinc-600); 
+      }
+      
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      
+      /* Glassmorphism Utilities */
+      .glass-panel {
+        background: rgba(18, 18, 20, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .dark .glass-panel {
+         background: rgba(18, 18, 20, 0.7);
+      }
+      /* Light mode glass */
+      :root:not(.dark) .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid #e4e4e7;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "jszip": "https://esm.run/jszip"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
